@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Source+Sans+Pro:wght@300&display=swap');
+
+.widget{
+    display: flex;
+    justify-content: space-between;
+    padding:1rem;
+}
+.widget p{
+    width:33%;
+    font-size: 1.2rem;
+}
+.day{
+    display: flex;
+    justify-content: flex-start;
+}
+.date{
+    font-family: 'Roboto', sans-serif;
+    padding-left: 1rem;
+}
+.temprature{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    padding-left: 2rem;
+}

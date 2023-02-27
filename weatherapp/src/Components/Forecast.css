@@ -1,0 +1,28 @@
+.forecastname{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.forecastname p{
+    font-size: 16pt;
+    font-weight: 400;
+    margin: 0;
+    margin-top: 1rem;
+}
+.forecastname span {
+    position: absolute;
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 36pt;
+}
+ul{
+    width: 100%;
+    margin: 0;
+    margin-top: 3rem;
+    padding: 0;
+}
+.ul{
+    z-index: 2;
+}
