@@ -7,17 +7,14 @@ const CityWeather = props => {
     const [night, setNight] = useState(true);
     let ctime = props.time.split(':')[0];
     let timeInt = parseInt(ctime);
-    console.log(ctime);
-    console.log(typeof (timeInt));
     useEffect(() => {
-        if (timeInt > 6 && timeInt < 18) {
+        if (new Date().getHours() > 6 && new Date().getHours() < 18) {
             setNight(false);
         }
         else {
             setNight(true);
         }
     }, [timeInt]);
-
     return <Card >
         <Image curNight={night} />
         {!night && <div className="cityname">

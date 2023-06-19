@@ -32,8 +32,7 @@ const Weather = () => {
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log(data);
-        const weatherData = {
+        let obj = {
             cityName: data.name.toUpperCase(),
             cityTemp: data.main.temp,
             cityHumidity: data.main.humidity,
@@ -42,99 +41,98 @@ const Weather = () => {
             cityDescription: data.weather[0].description.toUpperCase(),
             cityCountry: data.sys.country,
         };
+        setCityData(obj);
 
-        let timeurl = 'https://api.ipgeolocation.io/timezone?apiKey=ce987984ff6942ecbf63c001e7141a61&location=' + city;
-        const responseTime = await fetch(timeurl);
-        const dataTime = await responseTime.json();
+        // let timeurl = `https://api.ipgeolocation.io/timezone?apiKey=ce987984ff6942ecbf63c001e7141a61&location=${city}`;
+        // const responseTime = await fetch(timeurl);
+        // const dataTime = await responseTime.json();
 
-        console.log(dataTime);
-        const currentTime = dataTime.time_24;
-        const currentDayData = dataTime.date_time_txt;
-        const currentDate = dataTime.date;
-        console.log(currentTime);
-        console.log(currentDayData);
-        setCityTime(currentTime);
-        const tempDate = new Date(currentDate);
-        // tempDate.setDate(tempDate.getDate() + 1);
-        const dateTempData = tempDate.toDateString().split(' ').splice(1, 3);
+        // const currentTime = dataTime.time_24;
+        // const currentDayData = dataTime.date_time_txt;
+        // const currentDate = dataTime.date;
+        // // console.log(currentTime);
+        // // console.log(currentDayData);
+        // setCityTime(currentTime);
+        // const tempDate = new Date(currentDate);
+        // // tempDate.setDate(tempDate.getDate() + 1);
+        // const dateTempData = tempDate.toDateString().split(' ').splice(1, 3);
 
-        console.log(dateTempData);
+        // console.log(dateTempData);
 
-        setCityData(weatherData);
-        setIsLoading(false);
-        setEnteredText("");
-        console.log(cityData);
+        // setIsLoading(false);
+        // setEnteredText("");
+        // console.log(cityData);
 
-        let sevenDayUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=+' + city + '&appid=34480b98aa332da53123a0ac63a4ea9d&units=metric';
-        const responseForecast = await fetch(sevenDayUrl);
-        const sevenDayForecast = await responseForecast.json();
-        console.log(sevenDayForecast);
-        let temp = currentDayData.split(',')[0];
-        console.log(temp);
+        // let sevenDayUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=+' + city + '&appid=cbe3dd267a18f6c89943b3eff94f1ed7&units=metric';
+        // const responseForecast = await fetch(sevenDayUrl);
+        // const sevenDayForecast = await responseForecast.json();
+        // console.log(sevenDayForecast);
+        // let temp = currentDayData.split(',')[0];
+        // console.log(temp);
 
-        let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        for (let i = 0; i < 7; i++) {
-            if (temp === days[i]) {
-                const weatherDataForecast = [
-                    {
-                        day: days[i + 1],
-                        temp: (parseInt(sevenDayForecast.list[0].temp.day) + parseInt(sevenDayForecast.list[0].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
-                    }
-                    ,
-                    {
-                        day: days[i + 2],
-                        temp: (parseInt(sevenDayForecast.list[1].temp.day) + parseInt(sevenDayForecast.list[1].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
-                    }
-                    ,
-                    {
-                        day: days[i + 3],
-                        temp: (parseInt(sevenDayForecast.list[2].temp.day) + parseInt(sevenDayForecast.list[2].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
-                    }
-                    ,
-                    {
-                        day: days[i + 4],
-                        temp: (parseInt(sevenDayForecast.list[3].temp.day) + parseInt(sevenDayForecast.list[3].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
-                    }
-                    ,
-                    {
-                        day: days[i + 5],
-                        temp: (parseInt(sevenDayForecast.list[4].temp.day) + parseInt(sevenDayForecast.list[4].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        // let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        // for (let i = 0; i < 7; i++) {
+        //     if (temp === days[i]) {
+        //         const weatherDataForecast = [
+        //             {
+        //                 day: days[i + 1],
+        //                 temp: (parseInt(sevenDayForecast.list[0].temp.day) + parseInt(sevenDayForecast.list[0].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        //             }
+        //             ,
+        //             {
+        //                 day: days[i + 2],
+        //                 temp: (parseInt(sevenDayForecast.list[1].temp.day) + parseInt(sevenDayForecast.list[1].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        //             }
+        //             ,
+        //             {
+        //                 day: days[i + 3],
+        //                 temp: (parseInt(sevenDayForecast.list[2].temp.day) + parseInt(sevenDayForecast.list[2].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        //             }
+        //             ,
+        //             {
+        //                 day: days[i + 4],
+        //                 temp: (parseInt(sevenDayForecast.list[3].temp.day) + parseInt(sevenDayForecast.list[3].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        //             }
+        //             ,
+        //             {
+        //                 day: days[i + 5],
+        //                 temp: (parseInt(sevenDayForecast.list[4].temp.day) + parseInt(sevenDayForecast.list[4].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
 
-                    }
-                    ,
-                    {
-                        day: days[i + 6],
-                        temp: (parseInt(sevenDayForecast.list[5].temp.day) + parseInt(sevenDayForecast.list[5].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        //             }
+        //             ,
+        //             {
+        //                 day: days[i + 6],
+        //                 temp: (parseInt(sevenDayForecast.list[5].temp.day) + parseInt(sevenDayForecast.list[5].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
 
-                    }
-                    ,
-                    {
-                        day: days[i + 7],
-                        temp: (parseInt(sevenDayForecast.list[6].temp.day) + parseInt(sevenDayForecast.list[6].temp.eve)) / 2,
-                        date: tempDate.setDate(tempDate.getDate() + 1),
-                        ndate: tempDate.toDateString().split(' ').splice(1, 3)
-                    }
+        //             }
+        //             ,
+        //             {
+        //                 day: days[i + 7],
+        //                 temp: (parseInt(sevenDayForecast.list[6].temp.day) + parseInt(sevenDayForecast.list[6].temp.eve)) / 2,
+        //                 date: tempDate.setDate(tempDate.getDate() + 1),
+        //                 ndate: tempDate.toDateString().split(' ').splice(1, 3)
+        //             }
 
-                ]
+        //         ]
 
-                console.log(weatherDataForecast);
-                setForecastData(weatherDataForecast);
-                break;
+        //         console.log(weatherDataForecast);
+        //         setForecastData(weatherDataForecast);
+        //         break;
 
-            }
-        }
+        //     }
+        // }
         setIsLoading(false);
 
 
@@ -173,7 +171,7 @@ const Weather = () => {
                 time={cityTime}
             />}
             {isLoading && <Loader />}
-            {!isLoading && showData && <Forecast forecast={forecastData} />}
+            {/* {!isLoading && showData && <Forecast forecast={forecastData} />} */}
 
         </div>
     </div>
